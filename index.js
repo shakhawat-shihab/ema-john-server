@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //middleware
 app.use(cors());
@@ -18,8 +18,8 @@ async function run() {
     try {
         await client.connect();
         const database = client.db(process.env.DB_NAME);
-        const productCollection = database.collection(process.env.COLLECTION_NAME);
-        const ordersCollection = database.collection("orders");
+        const productCollection = database.collection(process.env.COLLECTION_NAME1);
+        const ordersCollection = database.collection(process.env.COLLECTION_NAME2);
         //post api
         app.post('/addProduct', async (req, res) => {
             console.log('new data : ', req.body);
